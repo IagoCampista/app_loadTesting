@@ -12,5 +12,9 @@
     "loadtesting"
   ],
   "author": "Luiz Gustavo",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^7.0.1",
+    "artillery": "^1.7.4"
+  }
 }
