@@ -1,0 +1,26 @@
+config:
+  target: "https://www.tiele.com.br"
+  phases:
+    - duration: 900
+      arrivalRate: 500
+      name: "Escalando"
+    
+  processor: "./gerar_tasks.js"
+scenarios:
+  - name: "App aws"
+    flow:
+      - get:
+          url: "/usuarios"
+      - post:
+          url: "/usuarios"
+          beforeRequest: gerarTasks
+          json:
+            nome: "{{ nome }}"
+            email: "{{ email }}"
+            senha: "{{ senha }}"
+          capture:
+            - json: "$.id"
+              as: "id"
+     
+      - delete:
+          url: "/usuarios/{{ id }}"
