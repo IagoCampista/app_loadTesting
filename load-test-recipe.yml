@@ -1,0 +1,26 @@
+config:
+  target: "http://crud-alb-88123628.us-east-1.elb.amazonaws.com/"
+  phases:
+    - duration: 900
+      arrivalRate: 20
+      name: "Escalando"
+  processor: "./gerar_receitas.js"
+
+scenarios:
+  - name: "Adicionar e Remover Receitas"
+    flow:
+      - get:
+          url: "/"
+      - post:
+          url: "/add"
+          beforeRequest: gerarReceitas
+          json:
+            name: "{{ nome }}"
+            ingredients: "{{ ingredientes }}"
+            directions: "{{ direcoes }}"
+          capture:
+            - json: "$.id"
+              as: "id"
+      - think: 2  # Pausa de 2 segundos
+      - delete:
+          url: "/delete/{{ id }}"

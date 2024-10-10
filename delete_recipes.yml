@@ -1,0 +1,25 @@
+config:
+  target: "http://44.202.69.180:3000"
+  phases:
+    - duration: 900
+      arrivalRate: 1
+      name: "Escalando"
+  processor: "./gerar_tasks.js"
+
+scenarios:
+  - name: "Deletar Receitas por ID"
+    flow:
+      - function: "gerarDelecoes"
+
+functions:
+  gerarDelecoes: |
+    function gerarDelecoes(requestParams, ctx, ee, next) {
+      for (let id = 27; id <= 98; id++) {
+        ctx.vars["id"] = id;
+        ee.emit("request", {
+          method: "DELETE",
+          url: `/delete/${id}`
+        });
+      }
+      return next();
+    }
