@@ -1,8 +1,8 @@
 config:
-  target: "http://crud-alb-88123628.us-east-1.elb.amazonaws.com/"
+  target: "http://iagocampista.live"
   phases:
     - duration: 900
-      arrivalRate: 20
+      arrivalRate: 200
       name: "Escalando"
   processor: "./gerar_receitas.js"
 

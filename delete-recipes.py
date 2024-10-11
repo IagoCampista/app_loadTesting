@@ -1,11 +1,11 @@
 import requests
 
 # URL base do seu servidor
-base_url = "http://44.202.69.180:3000/delete/"
+base_url = "http://iagocampista.live/delete/"
 
 # Função para deletar receitas
 def deletar_receitas():
-    for recipe_id in range(667, 1012):  # IDs de 30 a 90
+    for recipe_id in range(1946, 1968):  # IDs de 30 a 90
         url = f"{base_url}{recipe_id}"
         response = requests.delete(url)
         if response.status_code == 204:
